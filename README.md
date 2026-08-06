@@ -19,8 +19,11 @@ watch, and (later) intentionally break/repair against — without any risk to a 
   below).
 - `src/scripts/screenshot.ts` — `pnpm run screenshot`: renders that page and captures a decisive
   PNG with Playwright Chromium at a fixed viewport.
+- `src/manifest/` + `src/scripts/generate-manifest.ts` — `pnpm run manifest`: turns the PNGs in
+  `artifacts/` into a Visual Manifest v1 document validated against a schema copied from Agent
+  Team core (see "Visual Manifest generator" below).
 - `tests/` — unit tests covering both the healthy and failure-injected states, the status page
-  renderer, and (local-only) screenshot determinism.
+  renderer, the manifest pipeline, and (local-only) screenshot determinism.
 - `.github/workflows/ci.yml` — install → lint → typecheck → test → build. The job is named `CI`
   exactly, because Agent Team's registration probe treats a required check named `CI` as a hard
   contract.
@@ -38,11 +41,12 @@ pnpm build
 node dist/cli.js status
 ```
 
-For the screenshot tooling (optional — not required for `pnpm test`/CI to pass):
+For the screenshot/manifest tooling (optional — not required for `pnpm test`/CI to pass):
 
 ```bash
 pnpm exec playwright install chromium   # one-time, downloads a local Chromium build
 pnpm run screenshot                     # artifacts/status-none.png + SHA-256 on stdout
+pnpm run manifest                       # artifacts/visual-manifest.json, schema-validated (requires screenshot output)
 ```
 
 `node dist/cli.js status` prints deterministic JSON, e.g.:
@@ -111,8 +115,8 @@ JSON, e.g.:
 ```
 
 You can also render a specific mode directly, without touching the committed switch file — this
-is what the local-only stability test uses to get both a "healthy" and a "corrupt" screenshot in
-one run:
+is what the manifest generator and the local-only stability test use to get both a "healthy" and a
+"corrupt" screenshot in one run:
 
 ```bash
 node dist/scripts/screenshot.js --mode=status_corrupt
@@ -131,3 +135,43 @@ Playwright's Chromium or its OS-level dependencies, to keep CI fast, avoid a new
 flakiness on shared runners, and stay inside the existing 10-minute job budget. If Chromium is
 ever installed in CI (e.g. a future case genuinely needs a real screenshot in the pipeline), this
 same test file starts running there automatically — no code change required.
+
+## Visual Manifest generator
+
+`pnpm run manifest` scans `artifacts/*.png`, hashes each file, and assembles a **Visual Manifest
+v1** JSON document — the format F008 defines in Agent Team core for attaching visual evidence to
+an issue/PR. This sandbox does not own that schema; it keeps a read-only **data copy** of it (see
+`fixtures/schemas/SOURCE.md` for exact provenance/commit references) and validates every generated
+manifest against that copy before writing it.
+
+```bash
+pnpm run screenshot                              # produces artifacts/status-none.png
+node dist/scripts/screenshot.js --mode=status_corrupt  # produces artifacts/status-status_corrupt.png
+pnpm run manifest                                # produces artifacts/visual-manifest.json
+```
+
+The generator refuses to write a manifest that fails schema validation. Each artifact's
+`sha256` is a fresh digest of the actual file on disk at generation time (not copied from the
+screenshot script's own printed output), so a manifest's SHA and the real file are guaranteed to
+agree — `tests/manifest-pipeline.test.ts` asserts this same guarantee at the unit level with a
+synthetic fixture image (no Chromium required).
+
+**Acceptance-criteria (AC) mapping placeholders**: this sandbox has no real registered GitHub
+issue or Linear issue (that's E004, out of scope here), so `acceptanceCriteria` entries use a
+sandbox-local placeholder scheme instead of real Linear/GitHub identifiers:
+
+```
+sandbox-e2e:<caseId>:<acId>
+```
+
+`<caseId>` names one of the plan's `E1xx` end-to-end cases an artifact will eventually support
+(e.g. `E101`); `<acId>` is a short local label. `issueId` is similarly a fixed placeholder UUID
+(`issue_00000000-0000-4000-8000-000000000000`) satisfying F008's `issue_<uuid>` pattern. When this
+sandbox is later registered (E004) and wired into real E1xx cases, these placeholders are meant to
+be replaced by real ids, not treated as permanent.
+
+**CI decision**: unlike the screenshot-determinism suite, the manifest pipeline and
+schema-validation tests (`tests/manifest-pipeline.test.ts`, `tests/validate-visual-manifest.test.ts`,
+`tests/build-visual-manifest.test.ts`) need no browser — they run in CI unconditionally as part of
+`pnpm test`, since schema conformance and SHA/AC integrity are the actual contract F008 cares
+about, independent of how the screenshots themselves were captured.

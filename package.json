@@ -17,6 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings 0",
+    "manifest": "node dist/scripts/generate-manifest.js",
     "screenshot": "node dist/scripts/screenshot.js",
     "start": "node dist/cli.js status",
     "test": "pnpm run build && vitest run",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.2",
+    "ajv": "^8.20.0",
     "eslint": "^10.8.0",
     "globals": "^17.9.0",
     "playwright": "^1.62.1",
