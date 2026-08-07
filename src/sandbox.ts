@@ -3,7 +3,10 @@ import type { FailureMode } from "./failure-switch.js";
 export const SANDBOX_SERVICE_NAME = "agent-team-sandbox";
 export const SANDBOX_VERSION = "0.1.0";
 
+export const SANDBOX_STATUS_SCHEMA_VERSION = 1;
+
 export interface SandboxStatus {
+  schemaVersion: number;
   service: string;
   version: string;
   status: "ok" | "error";
@@ -28,6 +31,7 @@ export interface SandboxStatus {
 export function getSandboxStatus(mode: FailureMode = "none"): SandboxStatus {
   if (mode === "status_corrupt") {
     return {
+      schemaVersion: SANDBOX_STATUS_SCHEMA_VERSION,
       service: SANDBOX_SERVICE_NAME,
       version: SANDBOX_VERSION,
       status: "error",
@@ -38,6 +42,7 @@ export function getSandboxStatus(mode: FailureMode = "none"): SandboxStatus {
   }
 
   return {
+    schemaVersion: SANDBOX_STATUS_SCHEMA_VERSION,
     service: SANDBOX_SERVICE_NAME,
     version: SANDBOX_VERSION,
     status: "ok",
