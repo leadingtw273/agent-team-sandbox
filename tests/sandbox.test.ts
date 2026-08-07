@@ -4,6 +4,7 @@ import { getSandboxStatus } from "../src/sandbox.js";
 describe("getSandboxStatus", () => {
   it("returns a deterministic healthy payload for the default (none) mode", () => {
     expect(getSandboxStatus()).toStrictEqual({
+      schemaVersion: 1,
       service: "agent-team-sandbox",
       version: "0.1.0",
       status: "ok",
@@ -20,6 +21,7 @@ describe("getSandboxStatus", () => {
     // mutate the repository's failure-switch.json, which must stay "none"
     // so this project's own CI remains green.
     expect(getSandboxStatus("status_corrupt")).toStrictEqual({
+      schemaVersion: 1,
       service: "agent-team-sandbox",
       version: "0.1.0",
       status: "error",
