@@ -11,6 +11,7 @@ describe("cli status", () => {
     const output = execFileSync("node", [cliPath, "status"], { encoding: "utf-8" });
 
     expect(JSON.parse(output)).toStrictEqual({
+      schemaVersion: 1,
       service: "agent-team-sandbox",
       version: "0.1.0",
       status: "ok",
