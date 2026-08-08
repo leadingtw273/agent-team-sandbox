@@ -1,6 +1,6 @@
 export function chunk<T>(items: readonly T[], size: number): T[][] {
   if (!Number.isInteger(size) || size <= 0) {
-    throw new RangeError(`size must be a positive integer, received ${size}`);
+    throw new RangeError(`size must be a positive integer, received ${String(size)}`);
   }
 
   const result: T[][] = [];
