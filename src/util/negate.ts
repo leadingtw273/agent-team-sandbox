@@ -1,3 +1,3 @@
 export function negate(value: number): number {
-  return -value;
+  return value === 0 ? 0 : -value;
 }
