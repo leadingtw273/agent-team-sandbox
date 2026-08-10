@@ -1,6 +1,6 @@
 export function describeRange(min: number, max: number): string {
   if (min > max) {
-    throw new RangeError(`min (${min}) must not be greater than max (${max})`);
+    throw new RangeError(`min (${String(min)}) must not be greater than max (${String(max)})`);
   }
-  return `range: ${min}..${max}`;
+  return `range: ${String(min)}..${String(max)}`;
 }
