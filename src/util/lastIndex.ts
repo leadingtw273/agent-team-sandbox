@@ -1,3 +1,3 @@
-export function lastIndex<T>(items: readonly T[]): number {
+export function lastIndex(items: readonly unknown[]): number {
   return items.length - 1;
 }
