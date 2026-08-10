@@ -88,7 +88,7 @@ export function renderStatusPage(status: SandboxStatus): string {
   .panel.ok { background: #1b5e20; border: 8px solid #2e7d32; }
   .panel.error { background: #7f1d1d; border: 8px solid #c62828; }
   .badge { width: 96px; height: 96px; border-radius: 50%; }
-  .badge.ok { background: #ef5350; }
+  .badge.ok { background: #66bb6a; }
   .badge.error { background: #ef5350; }
   .label { font-size: 28px; letter-spacing: 4px; }
   .footer { font-size: 14px; color: #9aa0a6; }
