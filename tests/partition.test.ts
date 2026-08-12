@@ -29,7 +29,7 @@ describe("partition", () => {
 
   it("calls the predicate exactly once per item with the correct item and index", () => {
     const input = ["a", "b", "c"];
-    const calls: Array<[string, number]> = [];
+    const calls: [string, number][] = [];
 
     partition(input, (item, index) => {
       calls.push([item, index]);
@@ -64,7 +64,7 @@ describe("partition", () => {
   });
 
   it("infers generic element types correctly", () => {
-    const items: Array<string | number> = [1, "a", 2, "b"];
+    const items: (string | number)[] = [1, "a", 2, "b"];
     const [strings, numbers] = partition(items, (item) => typeof item === "string");
     expect(strings).toEqual(["a", "b"]);
     expect(numbers).toEqual([1, 2]);
