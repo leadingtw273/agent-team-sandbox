@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest"
+import { describe, expect, it } from "vitest";
 import { isPositiveInteger } from "../src/util/is-positive-integer.js";
 
 describe("isPositiveInteger", () => {
