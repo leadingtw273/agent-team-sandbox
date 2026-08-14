@@ -6,10 +6,7 @@ describe("isPositiveInteger", () => {
     expect(isPositiveInteger(value)).toBe(true);
   });
 
-  it.each([0, -1, 1.5, NaN, Infinity, "1", null, undefined])(
-    "returns false for %p",
-    (value) => {
-      expect(isPositiveInteger(value)).toBe(false);
-    },
-  );
+  it.each([0, -1, 1.5, NaN, Infinity, "1", null, undefined])("returns false for %p", (value) => {
+    expect(isPositiveInteger(value)).toBe(false);
+  });
 });
