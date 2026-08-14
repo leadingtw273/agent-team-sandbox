@@ -24,9 +24,9 @@ watch, and (later) intentionally break/repair against — without any risk to a 
   Team core (see "Visual Manifest generator" below).
 - `tests/` — unit tests covering both the healthy and failure-injected states, the status page
   renderer, the manifest pipeline, and (local-only) screenshot determinism.
-- `.github/workflows/ci.yml` — install → lint → typecheck → test → build. The job is named `CI`
-  exactly, because Agent Team's registration probe treats a required check named `CI` as a hard
-  contract.
+- `.github/workflows/ci.yml` — install → format check → lint → typecheck → test → build. The job is
+  named `CI` exactly, because Agent Team's registration probe treats a required check named `CI`
+  as a hard contract.
 
 ## Running locally
 
@@ -34,12 +34,18 @@ Requires Node 24 and pnpm 10.
 
 ```bash
 pnpm install
+pnpm format:check
 pnpm lint
 pnpm typecheck
 pnpm test
 pnpm build
 node dist/cli.js status
 ```
+
+`.agent-team/project.json` is deliberately excluded from Prettier. Agent Team writes that trusted
+configuration in its canonical serialized form and binds its exact content digest during project
+activation; formatting it as presentation JSON would invalidate the activation without changing
+the configuration's meaning.
 
 For the screenshot/manifest tooling (optional — not required for `pnpm test`/CI to pass):
 
@@ -122,8 +128,8 @@ is what the manifest generator and the local-only stability test use to get both
 node dist/scripts/screenshot.js --mode=status_corrupt
 ```
 
-**Determinism contract**: running `pnpm run screenshot` twice *on the same machine, with the same
-installed Chromium build*, for the same mode, must print the same SHA-256. That guarantee is
+**Determinism contract**: running `pnpm run screenshot` twice _on the same machine, with the same
+installed Chromium build_, for the same mode, must print the same SHA-256. That guarantee is
 verified automatically by `tests/screenshot-stability.test.ts` whenever Chromium is installed and
 `CI` is unset (see "CI decision" right below). Cross-machine or cross-Chromium-version pixel
 differences are a known, explicitly out-of-scope risk — this contract is same-environment
