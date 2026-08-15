@@ -4,8 +4,8 @@ export function countTrailing<T>(
 ): number {
   let count = 0;
 
-  for (let index = items.length - 1; index >= 0; index -= 1) {
-    if (!predicate(items[index]!, index)) {
+  for (const [index, item] of Array.from(items.entries()).reverse()) {
+    if (!predicate(item, index)) {
       break;
     }
 
