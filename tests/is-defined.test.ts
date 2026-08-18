@@ -6,19 +6,10 @@ describe("isDefined", () => {
     expect(isDefined(undefined)).toBe(false);
   });
 
-  it.each([
-    null,
-    "",
-    0,
-    NaN,
-    false,
-    Symbol("value"),
-    0n,
-    () => undefined,
-    [],
-    {},
-    new String(""),
-  ])("returns true for %p", (value) => {
-    expect(isDefined(value)).toBe(true);
-  });
+  it.each([null, "", 0, NaN, false, Symbol("value"), 0n, () => undefined, [], {}, new String("")])(
+    "returns true for %p",
+    (value) => {
+      expect(isDefined(value)).toBe(true);
+    },
+  );
 });
