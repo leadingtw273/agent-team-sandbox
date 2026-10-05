@@ -1,11 +1,8 @@
 # agent-team-sandbox
 
-A minimal, standalone Node.js project managed by [Agent Team](https://github.com/leadingtw273/agent-team)
-for probing GitHub registration, CI wiring, and end-to-end workflows.
+現役管理從 [AGENTS.md](AGENTS.md) 與 [AgentCollab 交接](docs/agent-collab/HANDOFF.md) 開始，由互動代理依 [核可輪次](docs/agent-collab/ITERATION.md) 工作；保留獨立 sandbox 的 CLI、CI 與測試用途。
 
-This repository is **not** part of Agent Team's core codebase and contains no core logic and no
-secrets. It exists purely as a small, safe target that Agent Team's own automation can register,
-watch, and (later) intentionally break/repair against — without any risk to a real project.
+此 repo 與舊 Agent Team 核心分離，不得放真實使用者資料或 secrets。以下 Agent Team registration、activation、failure-injection 與 schema 說明為保留的歷史測試／相容資料，不授權舊 dispatcher 自動接單，也不代表本輪重新啟用故障注入。`CI` 與 `agent-team/review` 的 required 名稱保留；現役規則以 PROJECT／WORKFLOW 與平台實際條件為準。
 
 ## What's here
 
