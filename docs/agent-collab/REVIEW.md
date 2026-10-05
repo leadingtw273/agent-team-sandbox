@@ -23,14 +23,14 @@ Base commit SHA／diff：待設定（給精確版本與可讀 diff）
 
 ## 實際結果（未審查，不預填成功）
 
-| 欄位 | 內容 |
-| --- | --- |
-| Reviewer／模型／日期 | 待設定 |
-| 隔離方式／是否另一模型／限制 | 待確認 |
-| 輸入需求、AC、base commit、diff、證據位置 | 待設定 |
-| reviewed_head | 待設定 |
-| verdict | 尚未審查；完成後填 pass / changes_requested / inconclusive |
-| Blocker：AC、位置、反例、修正要求 | 待確認 |
-| Backlog / advisory | 待確認 |
+| 欄位                                      | 內容                                                       |
+| ----------------------------------------- | ---------------------------------------------------------- |
+| Reviewer／模型／日期                      | 待設定                                                     |
+| 隔離方式／是否另一模型／限制              | 待確認                                                     |
+| 輸入需求、AC、base commit、diff、證據位置 | 待設定                                                     |
+| reviewed_head                             | 待設定                                                     |
+| verdict                                   | 尚未審查；完成後填 pass / changes_requested / inconclusive |
+| Blocker：AC、位置、反例、修正要求         | 待確認                                                     |
+| Backlog / advisory                        | 待確認                                                     |
 
 實作者逐項記錄「本單 blocker／後續 backlog／忽略」與理由；不將 advisory 自動變成 AC 或新機制。修正後或任何 Head 變更後，以最新 Head 重做獨立 review，舊結果不可沿用。平台要求的 approving review／required status 仍須滿足；本檔不強制另設 CI comment status。

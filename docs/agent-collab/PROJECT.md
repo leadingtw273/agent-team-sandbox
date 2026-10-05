@@ -2,19 +2,19 @@
 
 套件來源版本：`0.1.0`。現役開發管理採 AgentCollab；本檔記專案事實，不新增產品開發授權。當輪管理切換見 [ITERATION.md](ITERATION.md)。
 
-| 最少必要設定 | 內容 |
-| --- | --- |
-| 產品／用途 | 獨立 Node.js sandbox，提供可觀察的 status CLI、靜態狀態頁、測試與 CI；既有 Agent Team 註冊／故障注入資料保留作歷史測試用途。 |
-| Repo | [leadingtw273/agent-team-sandbox](https://github.com/leadingtw273/agent-team-sandbox) |
-| 共享進度（Linear） | [Agent Team Sandbox](https://linear.app/leadingtw273/project/agent-team-sandbox-f0162fc8f47f)（2026-10-05 `get_project` 實讀）；project ID：`1b08a29f-10a1-425b-9ec1-3f0103c5719d`，team ID：`b27abe8b-a6db-46f2-8b42-c47096908925`。工單、負責人、依賴、進度以 Linear 實際共享紀錄為準，開單前仍須重查同目標工作。 |
-| 引擎／執行環境 | package `agent-team-sandbox@0.1.0`；`.node-version` 為 24；engines Node `>=24 <25`、pnpm `>=10 <11`；packageManager 鎖 `pnpm@10.34.5`。 |
-| 本輪 base branch | 已存在 `main`；本次只有管理文件 PR，目標 `main`。後續產品開發 base／輪次須由各輪實際授權決定，不自行新增或虛構 branch。 |
-| 查核基線 | 2026-10-05 本機 `main`／HEAD `84921ccf7ba87813663d78399c19173102ad9ee9`／工作樹 clean；同日 GitHub main 回應同 SHA。開始正式 PR 前仍須重查。 |
-| 必要平台條件 | strict required status：`CI` 及 `agent-team/review`；[現役 ruleset](https://github.com/leadingtw273/agent-team-sandbox/rules/20505993) 為 active、無 bypass actor。 |
-| 驗證命令 | `pnpm install --frozen-lockfile` → `pnpm format:check` → `pnpm lint` → `pnpm typecheck` → `pnpm test` → `pnpm build`；見 [.github/workflows/ci.yml](../../.github/workflows/ci.yml)。本次只核對命令，未執行或安裝。 |
-| 交付取得與執行入口 | GitHub merged `main` 的確切 commit；依 package scripts 建置後 `node dist/cli.js status`；不是本輪新增交付。 |
-| 本輪產品決策聯絡人 | leadi（當次互動對話）；不得虛構其他成員或多人 roles。 |
-| 工作負責人／產品驗收人 | 各實際工單負責人以 Linear 為準；未取得前不推定其他人所有權。後續產品驗收由該輪指定，本輪不新增玩法驗收。 |
+| 最少必要設定           | 內容                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 產品／用途             | 獨立 Node.js sandbox，提供可觀察的 status CLI、靜態狀態頁、測試與 CI；既有 Agent Team 註冊／故障注入資料保留作歷史測試用途。                                                                                                                                                                                        |
+| Repo                   | [leadingtw273/agent-team-sandbox](https://github.com/leadingtw273/agent-team-sandbox)                                                                                                                                                                                                                               |
+| 共享進度（Linear）     | [Agent Team Sandbox](https://linear.app/leadingtw273/project/agent-team-sandbox-f0162fc8f47f)（2026-10-05 `get_project` 實讀）；project ID：`1b08a29f-10a1-425b-9ec1-3f0103c5719d`，team ID：`b27abe8b-a6db-46f2-8b42-c47096908925`。工單、負責人、依賴、進度以 Linear 實際共享紀錄為準，開單前仍須重查同目標工作。 |
+| 引擎／執行環境         | package `agent-team-sandbox@0.1.0`；`.node-version` 為 24；engines Node `>=24 <25`、pnpm `>=10 <11`；packageManager 鎖 `pnpm@10.34.5`。                                                                                                                                                                             |
+| 本輪 base branch       | 已存在 `main`；本次只有管理文件 PR，目標 `main`。後續產品開發 base／輪次須由各輪實際授權決定，不自行新增或虛構 branch。                                                                                                                                                                                             |
+| 查核基線               | 2026-10-05 本機 `main`／HEAD `84921ccf7ba87813663d78399c19173102ad9ee9`／工作樹 clean；同日 GitHub main 回應同 SHA。開始正式 PR 前仍須重查。                                                                                                                                                                        |
+| 必要平台條件           | strict required status：`CI` 及 `agent-team/review`；[現役 ruleset](https://github.com/leadingtw273/agent-team-sandbox/rules/20505993) 為 active、無 bypass actor。                                                                                                                                                 |
+| 驗證命令               | `pnpm install --frozen-lockfile` → `pnpm format:check` → `pnpm lint` → `pnpm typecheck` → `pnpm test` → `pnpm build`；見 [.github/workflows/ci.yml](../../.github/workflows/ci.yml)。本次只核對命令，未執行或安裝。                                                                                                 |
+| 交付取得與執行入口     | GitHub merged `main` 的確切 commit；依 package scripts 建置後 `node dist/cli.js status`；不是本輪新增交付。                                                                                                                                                                                                         |
+| 本輪產品決策聯絡人     | leadi（當次互動對話）；不得虛構其他成員或多人 roles。                                                                                                                                                                                                                                                               |
+| 工作負責人／產品驗收人 | 各實際工單負責人以 Linear 為準；未取得前不推定其他人所有權。後續產品驗收由該輪指定，本輪不新增玩法驗收。                                                                                                                                                                                                            |
 
 ## 現役流程與保留邊界
 
